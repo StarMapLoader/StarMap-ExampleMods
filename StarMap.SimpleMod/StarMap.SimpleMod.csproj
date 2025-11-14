@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <RootNamespace>StarMap.SimpleMod</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Lib.Harmony" Version="2.4.1" />
+    <PackageReference Include="StarMap.API" Version="0.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="mod.toml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+	<ItemGroup Condition="'$(Configuration)' == 'Debug'">
+		<Reference Include="..\..\Import\KSA.dll">
+			<ExcludeAssets>runtime</ExcludeAssets>
+		</Reference>
+		<Reference Include="..\..\Import\Brutal.ImGui.dll">
+			<ExcludeAssets>runtime</ExcludeAssets>
+		</Reference>
+		<Reference Include="..\..\Import\Brutal.ImGui.Extensions.dll">
+			<ExcludeAssets>runtime</ExcludeAssets>
+		</Reference>
+		<Reference Include="..\..\Import\Brutal.Core.Numerics.dll">
+			<ExcludeAssets>runtime</ExcludeAssets>
+		</Reference>
+		<Reference Include="..\..\Import\Brutal.Glfw.dll">
+			<ExcludeAssets>runtime</ExcludeAssets>
+		</Reference>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(Configuration)' != 'Debug'">
+		<PackageReference Include="StarMap.KSA.Dummy" Version="1.0.4">
+			<ExcludeAssets>runtime</ExcludeAssets>
+		</PackageReference>
+	</ItemGroup>
+
+</Project>
