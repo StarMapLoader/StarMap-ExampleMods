@@ -1,9 +1,4 @@
-﻿using Brutal.GlfwApi;
-using Brutal.ImGuiApi;
-using Brutal.Numerics;
-using HarmonyLib;
-using KSA;
-using System.Reflection;
+﻿using HarmonyLib;
 
 namespace StarMap.SimpleExampleMod
 {
@@ -14,6 +9,7 @@ namespace StarMap.SimpleExampleMod
 
         public static void Patch()
         {
+            Console.WriteLine("Patching SimpleMod...");
             _harmony?.PatchAll();
         }
 

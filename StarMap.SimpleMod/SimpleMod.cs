@@ -1,21 +1,74 @@
-﻿using KSA;
-using Brutal.ImGuiApi;
-using StarMap.Types;
-using Brutal.ImGuiApi.Extensions;
-using System;
-using Brutal.Numerics;
-using Brutal.GlfwApi;
+﻿using Brutal.ImGuiApi;
+using StarMap.API;
 
 namespace StarMap.SimpleExampleMod
 {
-    public class SimpleMod : IStarMapMod
+    public class SimpleMod : IStarMapMod, IStarMapOnUi
     {
         public bool ImmediateUnload => false;
+
+        public void OnAfterUi(double dt)
+        {
+            ImGuiWindowFlags flags = ImGuiWindowFlags.MenuBar;
+
+            ImGui.Begin("MyWindow", flags);
+            if (ImGui.BeginMenuBar())
+            {
+                if (ImGui.BeginMenu("SimpleMod"))
+                {
+                    if (ImGui.MenuItem("Show Message"))
+                    {
+                        Console.WriteLine("Hello from SimpleMod!");
+                    }
+                    ImGui.EndMenu();
+                }
+                ImGui.EndMenuBar();
+            }
+            ImGui.Text("Hello from SimpleMod!");
+            ImGui.End();
+
+            ImGui.Begin("MyWindow", flags);
+            if (ImGui.BeginMenuBar())
+            {
+                if (ImGui.BeginMenu("SimpleMod 2"))
+                {
+                    if (ImGui.MenuItem("Show Message 2"))
+                    {
+                        Console.WriteLine("Hello from SimpleMod 2!");
+                    }
+                    ImGui.EndMenu();
+                }
+                ImGui.EndMenuBar();
+            }
+            ImGui.Text("Hello from SimpleMod 2!");
+            ImGui.End();
+
+            flags = ImGuiWindowFlags.NoTitleBar | ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoBackground | ImGuiWindowFlags.NoSavedSettings | ImGuiWindowFlags.MenuBar;
+
+            ImGui.Begin((ImString)"Menu Bar", flags);
+            if (ImGui.BeginMenuBar())
+            {
+                if (ImGui.BeginMenu((ImString)"SimpleMod 2"))
+                {
+                    if (ImGui.MenuItem("Show Message 2"))
+                    {
+                        Console.WriteLine("Hello from SimpleMod 2!");
+                    }
+                    ImGui.EndMenu();
+                }
+                ImGui.EndMenuBar();
+            }
+            ImGui.Text("Hello from SimpleMod 2!");
+            ImGui.End();
+        }
+
+        public void OnBeforeUi(double dt)
+        {
+        }
 
         public void OnFullyLoaded()
         {
             Patcher.Patch();
-            SimpleWindow.Create();
 
         }
 
@@ -26,42 +79,6 @@ namespace StarMap.SimpleExampleMod
         public void Unload()
         {
             Patcher.Unload();
-        }
-        internal class SimpleWindow : Popup
-        {
-            private float _width;
-            private readonly IPopupWidget<SimpleWindow>[] _widgetMatrix;
-            private readonly PopupToken[] _textList;
-
-            private string _text = "Hello world!";
-
-            public SimpleWindow()
-            {
-                this._widgetMatrix = new IPopupWidget<SimpleWindow>[]
-                {
-                Popup.PopupButtonOkay,
-                };
-                this._textList = StringTokenParser.Parse(this._text).ToArray();
-            }
-
-            public static SimpleWindow Create() { return new SimpleWindow(); }
-
-            protected override void OnDrawUi()
-            {
-                ImGui.OpenPopup("SimpleMod", ImGuiPopupFlags.None);
-                ImGui.BeginPopupModal("SimpleMod", ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoSavedSettings | ImGuiWindowFlags.Popup | ImGuiWindowFlags.Modal);
-                GlfwWindow window = Program.GetWindow();
-                int2 size = window.Size;
-                float2 @float = Brutal.Numerics.float2.Unpack(size, Unpack.Float.Cast);
-                this._width = float.Clamp(@float.X * 0.85f, 600f * GameSettings.GetInterfaceScale(), 2048f * GameSettings.GetInterfaceScale());
-                float2 float2 = new float2(this._width, -1f);
-                ImGui.SetWindowSize(float2, ImGuiCond.None);
-                ImGuiHelper.SetCurrentWindowToCenter(ImGuiCond.Always);
-                PopupToken.Draw(this._textList);
-                ImGui.Separator();
-                Popup.DrawUi<SimpleWindow>(this, this._widgetMatrix);
-                ImGui.EndPopup();
-            }
         }
     }
 }

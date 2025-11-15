@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <PackageReference Include="Lib.Harmony" Version="2.4.1" />
-    <PackageReference Include="StarMap.API" Version="0.0.2" />
   </ItemGroup>
 
   <ItemGroup>

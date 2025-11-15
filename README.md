@@ -32,3 +32,11 @@ enabled = true
 ```
 
 -   When now loading the game via `StarMap.exe` or `StarMapLoader.exe`, the mod should be loaded and run
+
+## How to build simple example mod
+
+-   Add a folder on the same level as the solution folder called "Import"
+-   Add the KSA binaries there
+-   (Also possible to alter this location in the .csproj)
+-   Build the project, it should output the needed files
+-   Copy over the mod.toml. SimpleMod.dll and SimpleMod.Deps.json to KSA, this should load
