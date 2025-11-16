@@ -17,7 +17,7 @@
     </None>
   </ItemGroup>
 
-	<ItemGroup Condition="'$(Configuration)' == 'Debug'">
+	<ItemGroup>
 		<Reference Include="..\..\Import\KSA.dll">
 			<ExcludeAssets>runtime</ExcludeAssets>
 		</Reference>
@@ -35,10 +35,14 @@
 		</Reference>
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(Configuration)' != 'Debug'">
-		<PackageReference Include="StarMap.KSA.Dummy" Version="1.0.4">
+	<ItemGroup Condition="'$(Configuration)' == 'Debug'">
+		<Reference Include="..\..\Import\StarMap.API.dll">
 			<ExcludeAssets>runtime</ExcludeAssets>
-		</PackageReference>
+		</Reference>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(Configuration)' != 'Debug'">
+		<PackageReference Include="StarMap.API" Version="0.2.1" />
 	</ItemGroup>
 
 </Project>

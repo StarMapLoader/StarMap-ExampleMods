@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using KSA;
 
 namespace StarMap.SimpleExampleMod
 {
@@ -10,13 +11,20 @@ namespace StarMap.SimpleExampleMod
         public static void Patch()
         {
             Console.WriteLine("Patching SimpleMod...");
-            _harmony?.PatchAll();
+            _harmony?.PatchAll(typeof(Patcher).Assembly);
         }
 
         public static void Unload()
         {
             _harmony?.UnpatchAll(_harmony.Id);
             _harmony = null;
+        }
+
+        [HarmonyPatch(typeof(ModLibrary), nameof(ModLibrary.LoadAll))]
+        [HarmonyPostfix]
+        public static void AfterLoad()
+        {
+            Console.WriteLine("ModLibrary.LoadAll patched by SimpleMod.");
         }
     }
 }

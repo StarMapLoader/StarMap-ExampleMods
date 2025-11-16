@@ -1,12 +1,13 @@
 ﻿using Brutal.ImGuiApi;
+using KSA;
 using StarMap.API;
 
 namespace StarMap.SimpleExampleMod
 {
-    public class SimpleMod : IStarMapMod, IStarMapOnUi
+    [StarMapMod]
+    public class SimpleMod
     {
-        public bool ImmediateUnload => false;
-
+        [StarMapAfterGui]
         public void OnAfterUi(double dt)
         {
             ImGuiWindowFlags flags = ImGuiWindowFlags.MenuBar;
@@ -62,22 +63,25 @@ namespace StarMap.SimpleExampleMod
             ImGui.End();
         }
 
-        public void OnBeforeUi(double dt)
+        [StarMapImmediateLoad]
+        public void OnImmediateLoad(Mod mod)
         {
+            Console.WriteLine("SimpleMod - On immediate loaded");
+
         }
 
+        [StarMapAllModsLoaded]
         public void OnFullyLoaded()
         {
+            Console.WriteLine("SimpleMod - On fully loaded");
             Patcher.Patch();
 
         }
 
-        public void OnImmediatLoad()
-        {
-        }
-
+        [StarMapUnload]
         public void Unload()
         {
+            Console.WriteLine("SimpleMod - Unload");
             Patcher.Unload();
         }
     }
