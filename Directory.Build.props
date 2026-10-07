@@ -10,10 +10,7 @@
 
   <ItemGroup Condition="'$(NeedsKsaReferences)' == 'true' and '$(UseKsaReferencePackage)' != 'true'">
     <Reference Include="$(KsaReferencePath)\KSA.dll" Private="false" />
-    <Reference Include="$(KsaReferencePath)\Brutal.ImGui.dll" Private="false" />
-    <Reference Include="$(KsaReferencePath)\Brutal.ImGui.Extensions.dll" Private="false" />
-    <Reference Include="$(KsaReferencePath)\Brutal.Core.Numerics.dll" Private="false" />
-    <Reference Include="$(KsaReferencePath)\Brutal.Glfw.dll" Private="false" />
+    <Reference Include="$(KsaReferencePath)\Brutal.*.dll" Private="false" />
   </ItemGroup>
 
   <Target Name="ValidateKsaReferences"
