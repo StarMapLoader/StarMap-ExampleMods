@@ -1,0 +1,22 @@
+<Project>
+  <PropertyGroup>
+    <KsaReferencePath Condition="'$(KsaReferencePath)' == ''">$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\Import'))</KsaReferencePath>
+    <UseKsaReferencePackage Condition="'$(UseKsaReferencePackage)' == ''">false</UseKsaReferencePackage>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(NeedsKsaReferences)' == 'true' and '$(UseKsaReferencePackage)' == 'true'">
+    <PackageReference Include="RocketWerkz.KSA.Ref" Version="2026.9.10.5438" IncludeAssets="compile; build; analyzers" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(NeedsKsaReferences)' == 'true' and '$(UseKsaReferencePackage)' != 'true'">
+    <Reference Include="$(KsaReferencePath)\KSA.dll" Private="false" />
+    <Reference Include="$(KsaReferencePath)\Brutal.*.dll" Private="false" />
+  </ItemGroup>
+
+  <Target Name="ValidateKsaReferences"
+          BeforeTargets="ResolveAssemblyReferences"
+          Condition="'$(NeedsKsaReferences)' == 'true' and '$(UseKsaReferencePackage)' != 'true'">
+    <Error Condition="!Exists('$(KsaReferencePath)\KSA.dll')"
+           Text="KSA reference assemblies were not found at '$(KsaReferencePath)'. Copy the required KSA and Brutal DLLs there or set KsaReferencePath to their directory. Do not commit game binaries." />
+  </Target>
+</Project>
