@@ -4,10 +4,11 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <NeedsKsaReferences>true</NeedsKsaReferences>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="StarMap.API" Version="0.3.4" />
+    <PackageReference Include="StarMap.API" Version="0.3.6" />
   </ItemGroup>
 
   <ItemGroup>
@@ -15,26 +16,8 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<Reference Include="..\..\Import\KSA.dll">
-			<ExcludeAssets>runtime</ExcludeAssets>
-		</Reference>
-		<Reference Include="..\..\Import\Brutal.ImGui.dll">
-			<ExcludeAssets>runtime</ExcludeAssets>
-		</Reference>
-		<Reference Include="..\..\Import\Brutal.ImGui.Extensions.dll">
-			<ExcludeAssets>runtime</ExcludeAssets>
-		</Reference>
-		<Reference Include="..\..\Import\Brutal.Core.Numerics.dll">
-			<ExcludeAssets>runtime</ExcludeAssets>
-		</Reference>
-		<Reference Include="..\..\Import\Brutal.Glfw.dll">
-			<ExcludeAssets>runtime</ExcludeAssets>
-		</Reference>
-	</ItemGroup>
-
-	<ItemGroup>
 	  <None Update="mod.toml">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
 	</ItemGroup>
 

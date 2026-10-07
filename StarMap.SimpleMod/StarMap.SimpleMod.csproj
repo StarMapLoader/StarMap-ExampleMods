@@ -5,11 +5,12 @@
     <RootNamespace>StarMap.SimpleMod</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-	  
+    <NeedsKsaReferences>true</NeedsKsaReferences>
+
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Lib.Harmony" Version="2.4.1" />
+    <PackageReference Include="Lib.Harmony" Version="2.4.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,34 +19,8 @@
 
   <ItemGroup>
     <None Update="mod.toml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-
-	<ItemGroup>
-		<Reference Include="..\..\Import\KSA.dll">
-			<ExcludeAssets>runtime</ExcludeAssets>
-		</Reference>
-		<Reference Include="..\..\Import\Brutal.ImGui.dll">
-			<ExcludeAssets>runtime</ExcludeAssets>
-		</Reference>
-		<Reference Include="..\..\Import\Brutal.ImGui.Extensions.dll">
-			<ExcludeAssets>runtime</ExcludeAssets>
-		</Reference>
-		<Reference Include="..\..\Import\Brutal.Core.Numerics.dll">
-			<ExcludeAssets>runtime</ExcludeAssets>
-		</Reference>
-		<Reference Include="..\..\Import\Brutal.Glfw.dll">
-			<ExcludeAssets>runtime</ExcludeAssets>
-		</Reference>
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(Configuration)' == 'Debug'">
-		<Reference Include="..\..\Import\StarMap.API.dll">
-			<ExcludeAssets>runtime</ExcludeAssets>
-		</Reference>
-	</ItemGroup>
-	
-	
 
 </Project>
